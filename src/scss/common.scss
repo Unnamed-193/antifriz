@@ -11,6 +11,11 @@ img, video {
   display: block;
 }
 
+.visually-hidden {
+  position: fixed;
+  transform: scale(0);
+}
+
 [hidden] {
   display: none !important;
 }
@@ -88,9 +93,9 @@ img, video {
   background-color: var(--ozon);
   font-weight: 500;
   color: var(--white);
-  font-size: mixins.toRem(20);
+  font-size: mixins.toRem(22);
   line-height: 130%;
-  padding: mixins.toRem(15) mixins.toRem(26);
+  padding: mixins.toRem(12.4) mixins.toRem(51.4);
   display: flex;
   justify-content: center;
   align-items: center;

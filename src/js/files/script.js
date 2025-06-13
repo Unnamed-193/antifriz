@@ -3,11 +3,9 @@
 
 
 import './getCurrentYear.js';
-import './gsap/components/circle.js';
 import './gsap/components/components.js';
 import './gsap/hero/hero.js';
-import './counter/counter.js'
-import './counter/counter-time.js'
+
 
 import 'swiper/css';
 
@@ -141,72 +139,3 @@ function createScrollbar(parent) {
 
   return scrollbar;
 }
-
-function updateVideoSource() { 
-  console.log(1);
-  
-  const video = document.querySelector('.hero__video');
-  if (!video) return;
-
-  const isMobile = window.innerWidth <= 479.98;
-  const basePath = isMobile ? 'video/hero_video_mobile' : 'video/hero_video';
-  const poster = isMobile ? 'img/hero/poster_mobile.webp' : 'img/hero/poster.webp';
-  const cacheBuster = `?t=${Date.now()}`;
-
-  const newSources = `
-    <source src="${basePath}.mp4${cacheBuster}" type="video/mp4">
-    <source src="${basePath}.webm${cacheBuster}" type="video/webm">
-  `;
-
-  if (video.innerHTML.trim() !== newSources.trim()) {
-    video.poster = poster;
-    video.innerHTML = newSources;
-    video.setAttribute('playsinline', ''); 
-    video.setAttribute('webkit-playsinline', '');
-    video.setAttribute('muted', 'true'); // Обязательно для iOS
-    video.load();
-    const playPromise = video.play(); 
-
-    if (playPromise !== undefined) {
-      playPromise.catch(e => {
-        // Создаем кнопку-заглушку для iOS
-        if (isIOS()) {
-          createFallbackButton(video);
-        }
-      });
-    }
-  }
-}
-
-function isIOS() {
-  return /iPad|iPhone|iPod/.test(navigator.userAgent) || 
-         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-}
-
-function createFallbackButton(video) {
-  const container = video.parentElement;
-  const button = document.createElement('button');
-  button.className = 'ios-video-fallback';
-  button.innerHTML = '▶ Play Video';
-  button.style.cssText = `Add commentMore actions
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    padding: 12px 24px;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  `;
-}
-  window.addEventListener('load', function() {
-    updateVideoSource();
-
-    // Реинициализация при изменении ориентации
-    window.addEventListener('orientationchange', function() {
-      setTimeout(updateVideoSource, 300);
-    });
-  });

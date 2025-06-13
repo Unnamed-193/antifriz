@@ -11,15 +11,17 @@
 }
 
 .hero {
+  background-image: url('img/hero/hero.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  padding-top: 49px;
+  height: mixins.toRem(668);
+  @include mixins.adaptiveValue("padding-top", 49, 33);
 
-  height: mixins.toRem(583);
 
   @media (max-width:mixins.toEm(variables.$mobile)) {
     height: mixins.toRem(690);
-  }
-
-  @media (max-width:mixins.toEm(variables.$mobileSmall)) {
-    @include mixins.adaptiveValue("height", 808.4, 690, variables.$mobileSmall);
   }
 
   &__container {
@@ -32,59 +34,46 @@
   }
 
   &__content {
-    position: relative;
-    height: mixins.toRem(500);
-
-    @media (max-width:mixins.toEm(variables.$mobile)) {
-      height: mixins.toRem(474);
-    }
-
-    @media (max-width:mixins.toEm(variables.$mobileSmall)) {
-      @include mixins.adaptiveValue("height", 595, 474, variables.$mobileSmall);
-    }
   }
 
-  &__video {
-    position: absolute;
-    inset: 0;
-    object-fit: cover;
-    width: 100%;
-    height: 103%;
-    z-index: -1;
-
-    @media (max-width:mixins.toEm(variables.$mobileSmall)) {
-      height: 101%;
-      // object-position: 0px -65px;
-    }
-
+  &__logo {
+    @include mixins.adaptiveValue("margin-bottom", 54, 25);
+    @include mixins.adaptiveValue("width", 139, 94);
   }
+
 
   &__inner {
-    position: absolute;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    @include mixins.adaptiveValue("top", 58, 49);
   }
+
+
 
   &__title {
     font-weight: 700;
-    color: var(--white);
-    line-height: 1;
-    max-width: mixins.vw(1155, 1320);
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: mixins.toRem(60);
+    font-size: 69px;
+    line-height: 120%;
     letter-spacing: -0.02em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--white);
+    margin-bottom: mixins.toRem(19);
 
-    @include mixins.adaptiveValue("font-size", 60, 40);
+    // span::after {
+    //   content: "**";
+    //   font-weight: 400;
+    // }
+
+    @include mixins.adaptiveValue("font-size", 69, 32);
 
     @media (max-width:mixins.toEm(variables.$mobile)) {
       margin-bottom: mixins.toRem(8.8);
     }
   }
+
 
   &__text {
     font-weight: 300;
@@ -102,78 +91,63 @@
 
   }
 
-  &__wrapper {
+  &__red {
     position: absolute;
-    bottom: -83px;
+    bottom: 0;
     width: 100%;
     display: flex;
-    padding: mixins.toRem(37) mixins.toRem(50);
+    height: mixins.toRem(111);
     background: var(--red);
     align-items: center;
-    justify-content: flex-end;
-    gap: 110px;
-    @include mixins.adaptiveValue("border-radius", 20, 10);
-
+    justify-content: center;
+    
     @media (max-width:mixins.toEm(variables.$laptop)) {
       gap: 39px;
     }
-
+    
     @media (max-width:mixins.toEm(variables.$tablet)) {
       align-items: flex-end;
       flex-direction: column;
       position: absolute;
       padding: mixins.toRem(21.6) mixins.toRem(15);
     }
-
+    
     @media (max-width:mixins.toEm(variables.$mobile)) {
       bottom: -215px;
     }
   }
-
+  
   &__box {
+    max-width: 1320px;
+    position: absolute;
+    bottom: 32px;
+    width: 100%;
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-end;
   }
 
   &__slogan {
-    font-weight: 500;
-    line-height: 100%;
-    text-transform: uppercase;
-    color: var(--white);
-    font-size: mixins.toRem(32);
-
-    @media (max-width: mixins.toEm(variables.$laptop)) {
-      font-size: mixins.toRem(24);
-    }
-
-    @media (max-width: mixins.toEm(variables.$mobile)) {
-      max-width: mixins.toRem(162);
-      text-transform: none;
-      font-size: mixins.toRem(28);
-    }
+    font-weight: 400;
+    line-height: 130%;
+    text-align: center;
+    color: var(--grey-light);
+    height: mixins.toRem(40);
+    
+    @include mixins.adaptiveValue("font-size", 14, 10);
   }
-
+  
   &__bottles {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    bottom: mixins.toRem(18);
-    left: mixins.toRem(21);
-
-    @include mixins.adaptiveValue("width", 324, 175, 1920, variables.$mobile);
-    @include mixins.adaptiveValue("height", 295, 194, 1920, variables.$mobile);
+    transform: translateY(10px);
+    
+    @include mixins.adaptiveValue("width", 427, 175, 1920, variables.$mobile);
+    @include mixins.adaptiveValue("height", 393, 194, 1920, variables.$mobile);
 
     img {
       z-index: 1;
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-
-    @media (max-width: mixins.toEm(variables.$tablet)) {
-      left: mixins.toRem(7);
-      bottom: mixins.toRem(88);
     }
   }
 
