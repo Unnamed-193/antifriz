@@ -30,13 +30,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
     setTechItemStyle(techItemWraps);
   }
 
-  const advantagesBody = document.querySelector('.assort__list');
-  let condition = 
-    advantagesBody
-    // &&isMobile.iOS();
-  if (condition) {
-    setScrollbar(advantagesBody);
-  }
+  // const advantagesBody = document.querySelector('.assort__list');
+  // let condition = 
+  //   advantagesBody
+  //   // &&isMobile.iOS();
+  // if (condition) {
+  //   setScrollbar(advantagesBody);
+  // }
 })
 
 window.addEventListener('resize', (e)=>{
@@ -45,13 +45,13 @@ window.addEventListener('resize', (e)=>{
     setTechItemStyle(techItemWraps);
   }
 
-  const advantagesBody = document.querySelector('.assort__list');
-  let condition = 
-    advantagesBody
-    // &&isMobile.iOS();
-  if (condition) {
-    setScrollbar(advantagesBody);
-  }
+  // const advantagesBody = document.querySelector('.assort__list');
+  // let condition = 
+  //   advantagesBody
+  //   // &&isMobile.iOS();
+  // if (condition) {
+  //   setScrollbar(advantagesBody);
+  // }
 })
 
 

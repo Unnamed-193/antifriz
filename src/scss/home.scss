@@ -331,7 +331,6 @@
 
   &__container {
     max-width: mixins.toRem(1350);
-    position: relative;
 
     @include mixins.adaptiveValue("padding-top", 118.8, 100, 1920, variables.$laptop);
     @include mixins.adaptiveValue("padding-bottom", 118.8, 111.12);
@@ -367,29 +366,9 @@
   }
 
 
-  &__list {
-
-    @include mixins.adaptiveValue("column-gap", 20, 10);
-
-    @media (min-width:mixins.toEm(variables.$mobile)) {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @media (max-width:mixins.toEm(variables.$tablet)) {
-      display: flex;
-      padding-bottom: mixins.toRem(5);
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-snap-type: x mandatory;
-      margin-right: mixins.toRem(-15);
-      padding-right: mixins.toRem(15);
-
-      &::-webkit-scrollbar {
-        height: mixins.toRem(3);
-        display: none;
-      }
-    }
+  &__track {
+    margin-bottom: mixins.toRem(20);
+    overflow: visible;
   }
 
   &__slide {
