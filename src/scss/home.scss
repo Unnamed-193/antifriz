@@ -312,14 +312,224 @@
   background-image: url('img/line/bg.webp');
   background-repeat: no-repeat;
   background-size: cover;
+  position: relative;
 
   &__container {
     max-width: mixins.toRem(1350);
     text-align: center;
-    @include mixins.adaptiveValue("padding-bottom", 16, 94.8);
+    padding-top: 129px;
+    padding-bottom: 128px;
+    // @include mixins.adaptiveValue("padding-bottom", 16, 94.8);
   }
 
-  
+  &__content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__list--left {
+    svg {
+      position: absolute;
+      left: -29px;
+      top: -26px;
+    }
+  }
+
+  &__list--right {
+    svg {
+      position: absolute;
+      right: -41px;
+      top: -26px;
+    }
+  }
+
+  &__list-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 29px;
+
+
+  }
+
+
+
+  &__list--right {
+
+    .line__list-item {
+      justify-content: flex-end;
+    }
+  }
+
+  &__list-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    width: 92px;
+    height: 89px;
+    box-shadow: 10px 10px 30px 0 rgba(168, 65, 65, 0.4), -10px -10px 30px 0 #ffd2d2, 0 4px 10px 0 rgba(239, 9, 16, 0.65);
+    background: var(--red);
+    z-index: 1;
+  }
+
+  &__list-text {
+    text-align: left;
+    z-index: 1;
+    font-weight: 500;
+    line-height: 120%;
+    letter-spacing: -0.01em;
+    color: #535865;
+
+    @include mixins.adaptiveValue("font-size", 20, 16);
+  }
+
+
+  &__center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    z-index: 100;
+
+    img {
+      width: 334px;
+      height: 417.5px;
+    }
+  }
+
+}
+
+.tech {
+
+  &__container {
+    max-width: mixins.toRem(1350);
+    padding-top: 135px;
+  }
+
+  &__suptitle {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 120%;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 7px;
+  }
+
+  &__title {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 120%;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--grey-dark);
+    margin-bottom: 5px;
+
+    span {
+      color: #121212;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  &__count {
+    position: relative;
+    font-weight: 400;
+    font-size: 90px;
+    line-height: 120%;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--grey);
+    opacity: 0.3;
+    margin-bottom: 7px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 5px;
+      width: 100%;
+      height: 1px;
+      background-color: #a9afb9;
+    }
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__text {
+    max-width: 537px;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 130%;
+    color: #121212;
+
+    &--mb {
+      margin-bottom: 33px;
+    }
+  }
+
+  &__img-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__img-text {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    translate: -50% -50%;
+    box-shadow: 0 6px 14px 0 rgba(32, 33, 46, 0.12), 0 26px 26px 0 rgba(34, 35, 44, 0.1), 0 102px 41px 0 rgba(38, 39, 55, 0.02), -4px -4px 7px 0 rgba(239, 241, 243, 0.6);
+    background: var(--grey-light);
+    border-radius: 15px;
+    width: 359px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 110%;
+    text-align: center;
+    color: var(--grey-dark);
+  }
+
+  &__conclusion {
+    background: var(--red);
+    border-radius: 0 0 15px 15px;
+    padding: 20px 24px;
+
+    &--text {
+      font-weight: 300;
+      font-size: 22px;
+      line-height: 130%;
+      color: var(--white);
+      max-width: 714px;
+
+      span {
+        font-weight: 700;
+      }
+    }
+  }
 }
 
 
