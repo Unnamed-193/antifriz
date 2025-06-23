@@ -542,12 +542,22 @@
   &__container {
     max-width: mixins.toRem(1350);
 
-    @include mixins.adaptiveValue("padding-top", 118.8, 100, 1920, variables.$laptop);
-    @include mixins.adaptiveValue("padding-bottom", 118.8, 111.12);
+    @include mixins.adaptiveValue("padding-top", 137, 100, 1920, variables.$laptop);
+    @include mixins.adaptiveValue("padding-bottom", 139.6, 111.12);
 
     @media (max-width:mixins.toEm(variables.$mobile)) {
       padding-top: 0;
     }
+  }
+
+  &__suptitle {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 120%;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 5px;
   }
 
   &__title {
@@ -577,14 +587,14 @@
 
 
   &__track {
-    margin-bottom: mixins.toRem(20);
+    margin-bottom: mixins.toRem(26.4);
     overflow: visible;
   }
 
   &__slide {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     background-color: var(--light);
     border: mixins.toRem(1) solid var(--light_grey);
@@ -592,15 +602,18 @@
     padding: mixins.toRem(20);
     // opacity: 0;
     // translate: 0 mixins.toRem(30);
-    min-width: 286px;
+    min-width: 315px;
 
     @media (max-width:mixins.toEm(variables.$tablet)) {
       // flex: 1 0 mixins.toRem(227);
       scroll-snap-align: start;
     }
 
-    @include mixins.adaptiveValue("gap", 20, 10.8);
+    &:nth-child(1) {
+      @include mixins.adaptiveValue("gap", 11, 10.8);
+    }
 
+    @include mixins.adaptiveValue("gap", 21, 10.8);
     // .loaded & {
     //   transition:
     //     translate var(--globalAnimDuration) var(--globalTransitionTiming),
@@ -673,13 +686,13 @@
   }
 
   &__button {
-    padding: mixins.toRem(5) mixins.toRem(8);
+    padding: mixins.toRem(5) mixins.toRem(17.6);
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: mixins.toRem(45);
+    font-weight: 300;
 
-    @include mixins.adaptiveValue("font-size", 16, 14);
+    @include mixins.adaptiveValue("font-size", 14, 14);
 
     @media (max-width:mixins.toEm(variables.$laptop)) {
       min-height: mixins.toRem(46);
