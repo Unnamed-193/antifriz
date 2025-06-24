@@ -140,12 +140,12 @@ img, video {
   @media (max-width:mixins.toEm(variables.$laptop)) {
     padding: mixins.toRem(12) mixins.toRem(34.5);
     font-size: mixins.toRem(18);
-    order: 5;
+    text-align: center;
   }
 
-  @media (max-width:mixins.toEm(variables.$mobileSmall)) {
+  @media (max-width:mixins.toEm(variables.$mobile)) {
     width: 100%;
-    font-size: mixins.toRem(20);
+    font-size: mixins.toRem(18);
     border-radius: mixins.toRem(5);
   }
 
