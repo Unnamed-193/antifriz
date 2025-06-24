@@ -49,6 +49,28 @@
     background-image: image-set(url("img/hero/hero_mobile.webp") type("image/webp") 1x,
         url("img/hero/hero_mobile@2x.webp") type("image/webp") 2x,
         url("img/hero/hero_mobile@3x.webp") type("image/webp") 3x);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      background: linear-gradient(180deg, #fff 0%, #fff 36.49%, rgba(255, 255, 255, 0) 100%);
+      opacity: 0.5;
+      width: 100%;
+      height: mixins.toRem(95);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 9%;
+      mix-blend-mode: multiply;
+      background-image: url('img/hero/blur.svg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+      height: mixins.toRem(226);
+    }
   }
 
   &__container {
@@ -67,11 +89,12 @@
 
 
   &__inner {
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    z-index: 100;
   }
 
 
