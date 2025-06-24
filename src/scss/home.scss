@@ -327,6 +327,11 @@
     justify-content: space-between;
   }
 
+  &__left, &__right {
+    position: relative;
+    z-index: 100;
+  }
+  
   &__list {
     display: flex;
     flex-direction: column;
@@ -342,6 +347,12 @@
   }
 
   &__list--right {
+
+    .line__list-item {
+      gap: 18px;
+      justify-content: flex-end;
+    }
+
     svg {
       position: absolute;
       right: -41px;
@@ -359,15 +370,6 @@
 
   }
 
-
-
-  &__list--right {
-
-    .line__list-item {
-      justify-content: flex-end;
-    }
-  }
-
   &__list-icon {
     display: flex;
     align-items: center;
@@ -381,6 +383,7 @@
   }
 
   &__list-text {
+    max-width: 220px;
     text-align: left;
     z-index: 1;
     font-weight: 500;
@@ -395,13 +398,21 @@
   &__center {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 52%;
     translate: -50% -50%;
-    z-index: 100;
+    z-index: 10;
 
     img {
-      width: 334px;
+      width: 350px;
       height: 417.5px;
+    }
+
+    svg {
+      position: absolute;
+      left: 50%;
+      top: 47%;
+      translate: -50% -50%;
+      z-index: -1;
     }
   }
 
@@ -443,6 +454,7 @@
     flex-direction: column;
     gap: 11px;
   }
+
 
   &__count {
     position: relative;
