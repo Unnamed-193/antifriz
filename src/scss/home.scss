@@ -430,6 +430,7 @@
 
     @media (max-width:mixins.toEm(variables.$mobile)) {
       gap: mixins.toRem(20);
+      translate: mixins.toRem(29) mixins.toRem(-4);
     }
   }
 
@@ -460,9 +461,9 @@
   &__container {
     max-width: mixins.toRem(1350);
     text-align: center;
-    padding-top: mixins.toRem(129);
     padding-bottom: mixins.toRem(128);
-    // @include mixins.adaptiveValue("padding-bottom", 16, 94.8);
+    @include mixins.adaptiveValue("padding-top", 129, 108.2);
+    @include mixins.adaptiveValue("padding-bottom", 128, 58);
   }
 
   &__content {
@@ -578,6 +579,7 @@
       -10px -10px 30px 0 var(--white);
       background: #f0f0f3;
       border-radius: mixins.toRem(10);
+      padding: mixins.toRem(7) mixins.toRem(10) mixins.toRem(8);
     }
   }
 
@@ -628,6 +630,11 @@
 
       @include mixins.adaptiveValue("width", 350, 270, variables.$laptop, variables.$tablet );
       @include mixins.adaptiveValue("height", 417.5, 319, variables.$laptop, variables.$tablet );
+
+      @media (max-width:mixins.toEm(variables.$tablet)) {
+        width: auto;
+        height: auto;
+      }
     }
 
     svg {
@@ -636,14 +643,30 @@
       top: 47%;
       translate: -50% -50%;
       z-index: -1;
-
-      @include mixins.adaptiveValue("height", 631, 530, variables.$laptop, variables.$tablet);
+      @include mixins.adaptiveValue("height", 631, 482, 1920, variables.$tablet);
     }
 
     @media (max-width:mixins.toEm(variables.$tablet)) {
+      img {
+        margin: 0 auto;
+      }
+
+      margin-bottom: mixins.toRem(37);
       order: 1;
       position: static;
       translate: 0 0;
+
+      svg {
+        @include mixins.adaptiveValue("height", 534, 482, variables.$tablet, variables.$mobileSmall);
+        @include mixins.adaptiveValue("top", 152, 131, variables.$tablet, variables.$mobileSmall);
+      }
+    }
+
+    @media (max-width:mixins.toEm(variables.$mobileSmall)) {
+      svg {
+        height: auto;
+        top: 33%;
+      }
     }
   }
 
