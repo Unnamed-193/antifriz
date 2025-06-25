@@ -411,6 +411,7 @@
       }
 
 
+
     }
 
     @media (min-width:mixins.toEm(variables.$mobile)) {
@@ -452,17 +453,25 @@
   background-size: cover;
   position: relative;
 
+  @media (max-width:mixins.toEm(variables.$mobileSmall)) {
+    background-image: url('img/line/bg_mobile.webp');
+  }
+
   &__container {
     max-width: mixins.toRem(1350);
     text-align: center;
-    padding-top: 129px;
-    padding-bottom: 128px;
+    padding-top: mixins.toRem(129);
+    padding-bottom: mixins.toRem(128);
     // @include mixins.adaptiveValue("padding-bottom", 16, 94.8);
   }
 
   &__content {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width:mixins.toEm(variables.$tablet)) {
+      flex-direction: column;
+    }
   }
 
   &__left,
@@ -471,17 +480,45 @@
     z-index: 100;
   }
 
+  &__left {
+    @media (max-width:mixins.toEm(variables.$tablet)) {
+      order: 2;
+      margin-bottom: mixins.toRem(20);
+    }
+  }
+
+  &__right {
+    @media (max-width:mixins.toEm(variables.$tablet)) {
+      order: 3;
+    }
+  }
+
   &__list {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+
+    @include mixins.adaptiveValue("gap", 24, 20, variables.$laptop, variables.$tablet );
   }
 
   &__list--left {
+
+    .line__list-item {
+
+      &:nth-child(odd) {
+        svg {
+          @include mixins.adaptiveValue("width", 515, 380, variables.$laptop, variables.$tablet );
+        }
+      }
+
+    }
+
     svg {
       position: absolute;
-      left: -29px;
-      top: -26px;
+      top: mixins.toRem(-26);
+
+      @include mixins.adaptiveValue("left", -29, -20, variables.$laptop, variables.$tablet );
+      @include mixins.adaptiveValue("width", 455, 330, variables.$laptop, variables.$tablet );
+      @include mixins.adaptiveValue("height", 174, 145, variables.$laptop, variables.$tablet );
     }
   }
 
@@ -490,39 +527,80 @@
     .line__list-item {
       gap: 18px;
       justify-content: flex-end;
+
+      &:nth-child(odd) {
+        svg {
+          @include mixins.adaptiveValue("width", 517, 380, variables.$laptop, variables.$tablet );
+        }
+      }
+
+      .line__list-text {
+        text-align: center;
+        @include mixins.adaptiveValue("max-width", 220, 200, variables.$laptop, variables.$tablet );
+      }
+
+      @media (max-width:mixins.toEm(variables.$tablet)) {
+        flex-direction: row-reverse;
+
+        .line__list-text {
+          text-align: left;
+          max-width: mixins.toRem(226);
+        }
+      }
+
     }
 
     svg {
       position: absolute;
-      right: -41px;
-      top: -26px;
+      top: mixins.toRem(-26);
+
+      @include mixins.adaptiveValue("right", -41, -30, variables.$laptop, variables.$tablet );
+      @include mixins.adaptiveValue("width", 463, 330, variables.$laptop, variables.$tablet );
+      @include mixins.adaptiveValue("height", 174, 145, variables.$laptop, variables.$tablet );
     }
+
   }
 
   &__list-item {
     position: relative;
     display: flex;
     align-items: center;
-    padding: 10px 15px;
-    gap: 29px;
+    padding: mixins.toRem(10) mixins.toRem(15);
 
+    @include mixins.adaptiveValue("gap", 29, 20, variables.$laptop, variables.$tablet );
 
+    @media (max-width:mixins.toEm(variables.$tablet)) {
+      svg {
+        display: none;
+      }
+
+      box-shadow: 4px 5px 20px 0 rgba(174, 174, 192, 0.7),
+      -10px -10px 30px 0 var(--white);
+      background: #f0f0f3;
+      border-radius: mixins.toRem(10);
+    }
   }
 
   &__list-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 9px;
-    width: 92px;
-    height: 89px;
     box-shadow: 10px 10px 30px 0 rgba(168, 65, 65, 0.4), -10px -10px 30px 0 #ffd2d2, 0 4px 10px 0 rgba(239, 9, 16, 0.65);
     background: var(--red);
     z-index: 1;
+
+
+    @include mixins.adaptiveValue("width", 92, 60, variables.$laptop, variables.$tablet);
+    @include mixins.adaptiveValue("height", 89, 60, variables.$laptop, variables.$tablet);
+    @include mixins.adaptiveValue("border-radius", 9, 6);
+
+    @media (max-width:mixins.toEm(variables.$mobile)) {
+      box-shadow: 7px 7px 20px 0 rgba(168, 65, 65, 0.4), -7px -7px 20px 0 #ffd2d2, 0 3px 7px 0 rgba(239, 9, 16, 0.65);
+    }
   }
 
   &__list-text {
-    max-width: 220px;
+    max-width: mixins.toRem(220);
     text-align: left;
     z-index: 1;
     font-weight: 500;
@@ -530,7 +608,12 @@
     letter-spacing: -0.01em;
     color: #535865;
 
-    @include mixins.adaptiveValue("font-size", 20, 16);
+    @include mixins.adaptiveValue("font-size", 20, 16, variables.$laptop,
+      variables.$tablet);
+
+    @media (max-width:mixins.toEm(variables.$tablet)) {
+      max-width: mixins.toRem(226);
+    }
   }
 
 
@@ -542,8 +625,9 @@
     z-index: 10;
 
     img {
-      width: 350px;
-      height: 417.5px;
+
+      @include mixins.adaptiveValue("width", 350, 270, variables.$laptop, variables.$tablet );
+      @include mixins.adaptiveValue("height", 417.5, 319, variables.$laptop, variables.$tablet );
     }
 
     svg {
@@ -552,6 +636,14 @@
       top: 47%;
       translate: -50% -50%;
       z-index: -1;
+
+      @include mixins.adaptiveValue("height", 631, 530, variables.$laptop, variables.$tablet);
+    }
+
+    @media (max-width:mixins.toEm(variables.$tablet)) {
+      order: 1;
+      position: static;
+      translate: 0 0;
     }
   }
 
