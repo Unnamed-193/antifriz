@@ -1048,7 +1048,7 @@
     background: conic-gradient(from 221.46deg at 64.93% 94.59%, #0069FF 0deg, #F1107E 360deg);
     background-size: 300% 150%;
     background-position: 70% 70%;
-    border-radius: mixins.toRem(10);
+    border-radius: mixins.toRem(20);
   }
 
 
@@ -1062,15 +1062,12 @@
 
     @include mixins.adaptiveValue("padding-top", 69.8, 50);
 
-    @media (max-width:mixins.toEm(variables.$laptop)) {
-      text-align: center;
-    }
-
   }
 
   &__img {
     position: relative;
     width: 559px;
+    height: 251px;
 
     svg,
     img {
@@ -1092,12 +1089,22 @@
   &__content {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width:mixins.toEm(variables.$tablet)) {
+      flex-direction: column-reverse;
+      align-items: center;
+      text-align: center;
+    }
   }
 
   &__box {
     display: flex;
     flex-direction: column;
     transform: translateX(mixins.toRem(55));
+
+    @media (max-width:mixins.toEm(variables.$tablet)) {
+      transform: translateX(0);
+    }
   }
 
   &__title {
@@ -1134,6 +1141,10 @@
 
     @include mixins.adaptiveValue("font-size", 22, 18);
     @include mixins.adaptiveValue("height", 58, 47);
+
+    @media (max-width:mixins.toEm(variables.$tablet)) {
+      align-self: center;
+    }
   }
 }
 
