@@ -1092,7 +1092,7 @@
       -webkit-mask: radial-gradient(37.51% 48.7% at 50% 50%, #ffffff6b 65.82%, rgba(255, 255, 255, 0) 100%);
       mask: radial-gradient(45.51% 48.7% at 50% 50%, #ffffff5d 65.82%, rgba(255, 255, 255, 0) 100%);
 
-      @include mixins.adaptiveValue("height", 321, 156);
+      @include mixins.adaptiveValue("height", 321, 156, variables.$tablet);
     }
 
     &-bg {
