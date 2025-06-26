@@ -709,7 +709,8 @@
   &__list {
     display: flex;
     flex-direction: column;
-    gap: 11px;
+
+    @include mixins.adaptiveValue("gap", 11, 22);
   }
 
 
@@ -721,24 +722,30 @@
     text-transform: uppercase;
     color: var(--grey);
     opacity: 0.3;
-    margin-bottom: 7px;
 
     &::after {
       content: '';
       position: absolute;
       left: 0;
-      bottom: 5px;
       width: 100%;
-      height: 1px;
+      height: mixins.toRem(1);
       background-color: #a9afb9;
+
+      @include mixins.adaptiveValue("bottom", 5, 0);
     }
 
     @include mixins.adaptiveValue("font-size", 90, 70);
+    @include mixins.adaptiveValue("margin-bottom", 7, 19);
   }
 
   &__content {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width:mixins.toEm(variables.$tablet)) {
+      flex-direction: column;
+      gap: mixins.toRem(22);
+    }
   }
 
   &__text {
@@ -750,14 +757,21 @@
 
     &--mb {
       margin-bottom: 33px;
+
+      @media (max-width:mixins.toEm(variables.$mobile)) {
+        margin-bottom: 0;
+      }
     }
+
+    @include mixins.adaptiveValue("font-size", 22, 16);
   }
 
   &__img-box {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+
+    @include mixins.adaptiveValue("gap", 12, 20);
   }
 
   &__img-text {
@@ -767,9 +781,6 @@
     translate: -50% -50%;
     box-shadow: 0 6px 14px 0 rgba(32, 33, 46, 0.12), 0 26px 26px 0 rgba(34, 35, 44, 0.1), 0 102px 41px 0 rgba(38, 39, 55, 0.02), -4px -4px 7px 0 rgba(239, 241, 243, 0.6);
     background: var(--grey-light);
-    border-radius: 15px;
-    width: 359px;
-    height: 44px;
 
     display: flex;
     align-items: center;
@@ -777,27 +788,38 @@
 
     font-family: var(--font-family);
     font-weight: 700;
-    font-size: 14px;
     line-height: 110%;
     text-align: center;
     color: var(--grey-dark);
+
+    @include mixins.adaptiveValue("font-size", 14, 11);
+    @include mixins.adaptiveValue("width", 359, 299);
+    @include mixins.adaptiveValue("height", 44, 36);
+    @include mixins.adaptiveValue("border-radius", 15, 13);
+
+    @media (max-width:mixins.toEm(variables.$mobile)) {
+      top: 42%;
+      left: 52%;
+      box-shadow: 0 5px 12px 0 rgba(32, 33, 46, 0.12), 0 21px 21px 0 rgba(34, 35, 44, 0.1), 0 85px 34px 0 rgba(38, 39, 55, 0.02), -3px -3px 6px 0 rgba(239, 241, 243, 0.6);
+    }
   }
 
   &__conclusion {
     background: var(--red);
-    border-radius: 0 0 15px 15px;
-    padding: 20px 24px;
+    border-radius: 0 0 mixins.toRem(15) mixins.toRem(15);
+    padding: mixins.toRem(20) mixins.toRem(24);
 
     &--text {
       font-weight: 300;
-      font-size: 22px;
       line-height: 130%;
       color: var(--white);
-      max-width: 714px;
+      max-width: mixins.toRem(714);
 
       span {
         font-weight: 700;
       }
+
+      @include mixins.adaptiveValue("font-size", 22, 16);
     }
   }
 }
@@ -816,7 +838,6 @@
     @include mixins.adaptiveValue("padding-bottom", 139.6, 111.12);
 
     @media (max-width:mixins.toEm(variables.$mobile)) {
-      padding-top: 0;
     }
   }
 
