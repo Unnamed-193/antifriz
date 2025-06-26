@@ -767,6 +767,7 @@
     }
 
     @include mixins.adaptiveValue("font-size", 22, 16);
+
     @media (max-width:mixins.toEm(variables.$tablet)) {
       max-width: none;
     }
@@ -841,20 +842,21 @@
   &__container {
     max-width: mixins.toRem(1350);
 
-    @include mixins.adaptiveValue("padding-top", 137, 100, 1920, variables.$laptop);
-    @include mixins.adaptiveValue("padding-bottom", 139.6, 111.12);
+    @include mixins.adaptiveValue("padding-top", 137, 97.2);
+    @include mixins.adaptiveValue("padding-bottom", 139.6, 101.52);
 
     @media (max-width:mixins.toEm(variables.$mobile)) {}
   }
 
   &__suptitle {
     font-weight: 500;
-    font-size: 22px;
     line-height: 120%;
     letter-spacing: -0.02em;
     text-transform: uppercase;
     color: var(--red);
-    margin-bottom: 5px;
+
+    @include mixins.adaptiveValue("font-size", 22, 16);
+    @include mixins.adaptiveValue("margin-bottom", 5, 7);
   }
 
   &__title {
@@ -884,8 +886,8 @@
 
 
   &__track {
-    margin-bottom: mixins.toRem(26.4);
     overflow: visible;
+    @include mixins.adaptiveValue("margin-bottom", 26.4, 18.4);
   }
 
   &__slide {
@@ -893,24 +895,29 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: var(--light);
+    background: var(--grey-light);
     border: mixins.toRem(1) solid var(--light_grey);
     border-radius: mixins.toRem(10);
     padding: mixins.toRem(20);
     // opacity: 0;
     // translate: 0 mixins.toRem(30);
-    min-width: 315px;
 
     @media (max-width:mixins.toEm(variables.$tablet)) {
-      // flex: 1 0 mixins.toRem(227);
       scroll-snap-align: start;
     }
 
-    &:nth-child(1) {
-      @include mixins.adaptiveValue("gap", 11, 10.8);
+    @media (max-width:mixins.toEm(variables.$mobile)) {
+      margin-right: mixins.toRem(10) !important;
     }
 
-    @include mixins.adaptiveValue("gap", 21, 10.8);
+
+
+    &:nth-child(1) {
+      @include mixins.adaptiveValue("gap", 11, 25.2);
+    }
+
+    @include mixins.adaptiveValue("gap", 21, 46);
+    @include mixins.adaptiveValue("min-width", 315, 283);
     // .loaded & {
     //   transition:
     //     translate var(--globalAnimDuration) var(--globalTransitionTiming),
@@ -938,29 +945,19 @@
     text-transform: uppercase;
     opacity: 0;
     translate: 0 mixins.toRem(30);
+    color: #121212;
+    align-items: center;
     @include mixins.adaptiveValue("font-size", 25, 20);
 
-    @media (min-width:mixins.toEm(variables.$mobile)) {
-      align-items: center;
-    }
+    // span {
 
-    @media (max-width:mixins.toEm(1023.98)) {
-      display: block;
-    }
-
-    @media (max-width:mixins.toEm(variables.$mobile)) {
-      align-self: flex-start;
-    }
-
-    span {
-
-      &:last-child {
-        color: #828080;
-      }
-    }
+    //   &:last-child {
+    //     color: #828080;
+    //   }
+    // }
 
     &:not(:last-child) {
-      margin-bottom: mixins.toRem(5);
+      @include mixins.adaptiveValue("margin-bottom", 5, -4.6);
     }
 
     .loaded & {
@@ -988,27 +985,27 @@
     justify-content: center;
     align-items: center;
     font-weight: 300;
-
-    @include mixins.adaptiveValue("font-size", 14, 14);
+    font-size: mixins.toRem(14);
 
     @media (max-width:mixins.toEm(variables.$laptop)) {
       min-height: mixins.toRem(46);
     }
 
     @media (max-width:mixins.toEm(variables.$mobile)) {
-      min-height: mixins.toRem(44.8);
+      min-height: mixins.toRem(36);
       padding: 0 mixins.toRem(20);
     }
   }
 
   &__progress {
     background-color: var(--scrollbar_bg);
-    height: mixins.toRem(5);
     border-radius: calc(1px / 0);
     position: relative;
     overflow: hidden;
     opacity: 0;
     translate: 0 mixins.toRem(30);
+
+    @include mixins.adaptiveValue("height", 5, 3);
 
     .loaded & {
       transition:
