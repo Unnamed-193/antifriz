@@ -14,7 +14,12 @@
   --blue: #21A0E5;
   --ozon: #0069FF;
   --slogan: #bc9767;
-  --angularGradient: radial-gradient(103.1% 440.87% at 41.74% 55.61%, #0069FF 0%, #783DBF 48.65%, #F1107E 100%);
+  --angularGradient: linear-gradient(135deg,
+      #F1107E 0%,
+      #783DBF 17%,
+      #0069FF 40%,
+      #783DBF 75%,
+      #F1107E 100%);
   --grey: #A5A6A6;
   --dark_grey: #5A5A5A;
   --scrollbar_bg: #D9D9D9;
