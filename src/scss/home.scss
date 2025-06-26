@@ -742,9 +742,12 @@
     display: flex;
     justify-content: space-between;
 
+    @media (max-width:mixins.toEm(variables.$laptop)) {
+      gap: mixins.toRem(22);
+    }
+
     @media (max-width:mixins.toEm(variables.$tablet)) {
       flex-direction: column;
-      gap: mixins.toRem(22);
     }
   }
 
@@ -764,6 +767,10 @@
     }
 
     @include mixins.adaptiveValue("font-size", 22, 16);
+    @media (max-width:mixins.toEm(variables.$tablet)) {
+      max-width: none;
+    }
+
   }
 
   &__img-box {
@@ -837,8 +844,7 @@
     @include mixins.adaptiveValue("padding-top", 137, 100, 1920, variables.$laptop);
     @include mixins.adaptiveValue("padding-bottom", 139.6, 111.12);
 
-    @media (max-width:mixins.toEm(variables.$mobile)) {
-    }
+    @media (max-width:mixins.toEm(variables.$mobile)) {}
   }
 
   &__suptitle {
