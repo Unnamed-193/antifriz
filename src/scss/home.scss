@@ -1077,15 +1077,27 @@
     @include mixins.adaptiveValue("width", 559, 345);
     @include mixins.adaptiveValue("height", 251, 146);
 
-    svg,
+    &-bg,
     img {
       position: absolute;
+      transition: 0.5s ease;
       translate: -50% -50%;
     }
 
-    svg {
-      top: 52%;
-      left: 55%;
+    &-bg {
+      transform-origin: center;
+      border-radius: 96px;
+      width: 100%;
+      background: conic-gradient(from 256deg, rgba(255, 255, 255, 1) 0deg, transparent 14.6228deg, transparent 39.1289deg, rgba(255, 255, 255, 1) 72.8236deg, transparent 91.7308deg, transparent 125.917deg, rgba(255, 255, 255, 1) 144.405deg, transparent 167.559deg, transparent 199.71deg, rgba(255, 255, 255, 1) 216.735deg, transparent 228.462deg, transparent 260.199deg, rgba(255, 255, 255, 1) 288.651deg, transparent 306.346deg, transparent 346.5deg, rgba(255, 255, 255, 1) 360deg);
+      -webkit-mask: radial-gradient(37.51% 48.7% at 50% 50%, #ffffff6b 65.82%, rgba(255, 255, 255, 0) 100%);
+      mask: radial-gradient(45.51% 48.7% at 50% 50%, #ffffff5d 65.82%, rgba(255, 255, 255, 0) 100%);
+
+      @include mixins.adaptiveValue("height", 321, 156);
+    }
+
+    &-bg {
+      top: 46%;
+      left: 54%;
 
       @media (max-width:mixins.toEm(variables.$tablet)) {
         top: 49%;
@@ -1094,12 +1106,22 @@
     }
 
     img {
-      top: 63%;
-      left: 58%;
+      top: 64%;
+      left: 58.3%;
 
       @media (max-width:mixins.toEm(variables.$tablet)) {
         top: 59%;
         left: 52%;
+      }
+    }
+
+    &:hover {
+      img {
+        transform: scale(1.1);
+      }
+
+      .ozon__img-bg {
+        transform: rotate(-40deg);
       }
     }
   }
