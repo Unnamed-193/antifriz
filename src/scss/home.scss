@@ -1037,7 +1037,7 @@
 
 //==========================================================================================
 .ozon {
-  
+
   @media (min-width:mixins.toEm(variables.$mobile)) {
     background: var(--angularGradient);
     border-radius: mixins.toRem(20) mixins.toRem(20) 0 0;
