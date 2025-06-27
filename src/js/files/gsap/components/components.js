@@ -209,9 +209,20 @@ function initLineAnimation() {
   if (isMobile) {
     console.log(1);
 
+
+    lineTl
+    .from('.line__list-item', {
+      delay: 0.3,
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.3
+    })
+
   } else if(isTablet) {
     lineTl
     .from('.line__list-item', {
+      delay: 0.3,
       y: 30,
       opacity: 0,
       duration: 0.8,

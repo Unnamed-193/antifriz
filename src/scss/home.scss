@@ -442,6 +442,10 @@
 
     @media (max-width:mixins.toEm(variables.$mobile)) {
       gap: mixins.toRem(20);
+    }
+
+    @media (max-width:mixins.toEm(variables.$mobileSmall)) {
+      gap: mixins.toRem(20);
       translate: mixins.toRem(29) mixins.toRem(-4);
     }
   }
