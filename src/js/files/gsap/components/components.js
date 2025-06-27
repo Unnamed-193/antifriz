@@ -15,7 +15,7 @@ function initAnimations() {
 
   initOwAnimation();
   initLineAnimation();
-  initEvidenceAnimation();
+  initTechAnimation();
 }
 
 // Функция для анимации секции Components
@@ -24,6 +24,7 @@ function initOwAnimation() {
   const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
 
   const baseSettings = {
+    delay: 0.1,
     y: 30,
     opacity: 0,
     duration: 0.6,
@@ -65,24 +66,27 @@ function initLineAnimation() {
   });
 
   lineTl
-    .from('.line__title', { y: 30, opacity: 0, duration: 0.8 })
-    .from('.line__subtitle', { y: 30, opacity: 0, duration: 0.8 }, '-=0.5')
-    .from('.line__left', { x: -30, opacity: 0, duration: 0.8 }, '-=0.4')
-    .from('.line__list-item', { 
-      x: 30, 
+    .from('.line__left .line__list-item', { 
+      x: -40, 
       opacity: 0, 
       duration: 0.8, 
-      stagger: 0.2 
-    }, '-=0.4');
+      stagger: 0.3 
+    }, 'line')
+    .from('.line__right .line__list-item', { 
+      x: 40, 
+      opacity: 0, 
+      duration: 0.8, 
+      stagger: 0.3 
+    }, 'line');
 }
 
 // Функция для анимации секции Evidence
-function initEvidenceAnimation() {
-  const evidenceSection = document.querySelector('.evidence');
+function initTechAnimation() {
+  const techSection = document.querySelector('.tech');
   const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
-  const evidenceTl = gsap.timeline({
+  const techTl = gsap.timeline({
     scrollTrigger: {
-      trigger: evidenceSection,
+      trigger: techSection,
       start: 'top 80%',
       toggleActions: 'play none none none',
       once: true
@@ -90,21 +94,42 @@ function initEvidenceAnimation() {
   });
 
   if(isMobile) {
-    evidenceTl
-    .from('.evidence__title', { y: 30, autoAlpha: 0, duration: 0.5, ease: "power1.out" })
-    .from('.evidence__subtitle', { y: 30, opacity: 0, duration: 0.8 }, '-=0.3')
-    .from('.evidence__mileage', { y: 50, opacity: 0, duration: 0.7 }, '-=0.3')
-    .from('.evidence__img-mobile', { y: 50, opacity: 0, duration: 0.8, ease: "power2.out" }, '-=0.3')
-    .from('.evidence__result', { y: 50, opacity: 0, duration: 0.7 }, '-=0.3')
-    .from('.evidence__btn', { y: 50, opacity: 0, duration: 0.7 }, '-=0.3')
+    techTl
+    .from('.tech__suptitle', { y: 30, opacity: 0, duration: 0.8 })
+    .from('.tech__title', { y: 30, autoAlpha: 0, duration: 0.5, ease: "power1.out" }, '-=0.3');
+  
+  // Анимация первого элемента списка
+  techTl
+    .from('.tech__list-item:first-child .tech__count', { y: 20, opacity: 0, duration: 0.4 })
+    .from('.tech__list-item:first-child .tech__text', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
+    .from('.tech__list-item:first-child .tech__img-box', { y: 20, opacity: 0, duration: 0.6 }, '-=0.2');
+  
+  // Анимация второго элемента списка
+  techTl
+    .from('.tech__list-item:nth-child(2) .tech__count', { y: 20, opacity: 0, duration: 0.4 })
+    .from('.tech__list-item:nth-child(2) .tech__text', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
+    .from('.tech__list-item:nth-child(2) .tech__img-box', { y: 20, opacity: 0, duration: 0.6 }, '-=0.2')
+    .from('.tech__list-item:nth-child(2) .tech__text:last-child', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
+    .from('.tech__conclusion', { y: 20, opacity: 0, duration: 0.6 }, '-=0.3');
+
   } else {
-      evidenceTl
-    .from('.evidence__title', { y: 30, autoAlpha: 0, duration: 0.5, ease: "power1.out" })
-    .from('.evidence__subtitle', { y: 30, opacity: 0, duration: 0.8 }, '-=0.3')
-    .from('.evidence__mileage', { y: 50, opacity: 0, duration: 0.7 }, '-=0.3')
-    .from('.evidence__result', { y: 50, opacity: 0, duration: 0.7 }, '-=0.3')
-    .from('.evidence__btn', { y: 50, opacity: 0, duration: 0.7 }, '-=0.3')
-    .from('.evidence__img._md3dn', { x: 100, opacity: 0, duration: 1, ease: "power2.out" }, '-=0.8')
+    techTl
+    .from('.tech__suptitle', { y: 30, opacity: 0, duration: 0.8 })
+    .from('.tech__title', { y: 30, autoAlpha: 0, duration: 0.5, ease: "power1.out" }, '-=0.3');
+  
+  // Анимация первого элемента списка
+  techTl
+    .from('.tech__list-item:first-child .tech__count', { y: 20, opacity: 0, duration: 0.4 })
+    .from('.tech__list-item:first-child .tech__text', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
+    .from('.tech__list-item:first-child .tech__img-box', { y: 20, opacity: 0, duration: 0.6 }, '-=0.2');
+  
+  // Анимация второго элемента списка
+  techTl
+    .from('.tech__list-item:nth-child(2) .tech__count', { y: 20, opacity: 0, duration: 0.4 })
+    .from('.tech__list-item:nth-child(2) .tech__text', { y: 20, opacity: 0, duration: 0.5, stagger: 0.1 }, '-=0.2')
+    .from('.tech__list-item:nth-child(2) .tech__img-box', { y: 20, opacity: 0, duration: 0.6 }, '-=0.2')
+    .from('.tech__conclusion', { y: 20, opacity: 0, duration: 0.6 }, '-=0.3');
+
   }
 
 
