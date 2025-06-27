@@ -196,35 +196,39 @@ function initOwAnimation() {
 function initLineAnimation() {
   const lineSection = document.querySelector('.line');
   const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
+  const isTablet = window.matchMedia('(max-width: 991.98px)').matches;
+  const lineTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: lineSection,
+      start: 'top 80%',
+      toggleActions: 'play none none none',
+      once: true
+    }
+  });
 
   if (isMobile) {
     console.log(1);
 
+  } else if(isTablet) {
+    lineTl
+    .from('.line__list-item', {
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.3
+    })
   } else {
-    const lineTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: lineSection,
-        start: 'top 80%',
-        toggleActions: 'play none none none',
-        once: true
-      }
-    });
 
     lineTl
-      .from('.line__center--desktop', {
-        y: -563,
-        x: 9,
-        opacity: 0,
-        scale: 0.78,
-        duration: 1.5,
-      })
       .from('.line__left .line__list-item', {
+        delay: 0.7,
         x: -40,
         opacity: 0,
         duration: 0.8,
         stagger: 0.3
       }, 'line')
       .from('.line__right .line__list-item', {
+        delay: 0.7,
         x: 40,
         opacity: 0,
         duration: 0.8,
