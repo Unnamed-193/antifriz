@@ -297,6 +297,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
+    @include mixins.adaptiveValue("--mh", 315, 250, variables.$tablet, variables.$mobile);
+
+    img {
+      height: calc(var(--mh));
+
+
+      @media (max-width:mixins.toEm(variables.$mobile)) {
+        height: auto;
+      }
+    }
+
+
 
     // @media (min-width:mixins.toEm(variables.$mobile)) {
     //   translate: mixins.toRem(4) mixins.toRem(50);
@@ -666,6 +679,10 @@
         height: auto;
         top: 33%;
       }
+    }
+
+    @media (min-width:mixins.toEm(variables.$mobile)) and (max-width:mixins.toEm(variables.$tablet)) {
+      height: mixins.toRem(310);
     }
   }
 

@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Регистрация плагина
 gsap.registerPlugin(ScrollTrigger);
 
+
 // Основная функция инициализации анимаций
 function initAnimations() {
   // Настройки по умолчанию для ScrollTrigger
@@ -33,7 +34,7 @@ function initOwAnimation() {
     // Десктоп версия
     gsap.set(bottles, {
       x: (i) => {
-        switch(i) {
+        switch (i) {
           case 0: return '335%';
           case 1: return '216%';
           case 2: return '112%';
@@ -43,12 +44,12 @@ function initOwAnimation() {
           default: return 0;
         }
       },
-      y: (i) => [0,1,2,6].includes(i) ? '2%' : 0,
+      y: (i) => [0, 1, 2, 6].includes(i) ? '2%' : 0,
       opacity: (i) => i === 3 ? 1 : 0,
       zIndex: (i) => {
         if (i === 3) return 4;
-        if ([0,6].includes(i)) return 1;
-        if ([1,5].includes(i)) return 2;
+        if ([0, 6].includes(i)) return 1;
+        if ([1, 5].includes(i)) return 2;
         return 3;
       }
     });
@@ -57,22 +58,22 @@ function initOwAnimation() {
     const showTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: owSection,
-        start: 'top 40%',
+        start: 'top 50%',
         end: 'top 30%',
-        toggleActions: 'play none none none',
-        markers: false // можно включить для отладки
+        toggleActions: 'play none play none',
+        markers: false, // можно включить для отладки
       }
     });
-    
+
     showTimeline.to(bottlesContainer, {
       opacity: 1,
       y: 0,
       duration: 0.5
     });
-    
+
     showTimeline.to(bottles, {
       x: (i) => {
-        switch(i) {
+        switch (i) {
           case 0: return '169%';
           case 1: return '112%';
           case 2: return '61%';
@@ -82,7 +83,7 @@ function initOwAnimation() {
           default: return 0;
         }
       },
-      y: (i) => [0,1,2,6].includes(i) ? '2%' : 0,
+      y: (i) => [0, 1, 2, 6].includes(i) ? '2%' : 0,
       opacity: 1,
       duration: 0.8,
       ease: 'power2.inOut'
@@ -94,14 +95,14 @@ function initOwAnimation() {
         trigger: owSection,
         start: 'bottom bottom',
         end: 'bottom+=100% bottom',
-        toggleActions: 'play none none none',
+        toggleActions: 'play none reverse none',
         markers: false // можно включить для отладки
       }
     });
-    
+
     hideTimeline.to(bottles, {
       x: (i) => {
-        switch(i) {
+        switch (i) {
           case 0: return '335%';
           case 1: return '216%';
           case 2: return '112%';
@@ -115,48 +116,122 @@ function initOwAnimation() {
       duration: 0.8,
       ease: 'power2.inOut'
     });
+
+    const scrollPosition = window.scrollY;
+    const sectionTop = owSection.offsetTop;
+    const sectionHeight = owSection.offsetHeight;
+
+    if (scrollPosition > sectionTop + sectionHeight * 0.5) {
+      hideTimeline.to(bottles, {
+        x: (i) => {
+          switch (i) {
+            case 0: return '335%';
+            case 1: return '216%';
+            case 2: return '112%';
+            case 4: return '-102%';
+            case 5: return '-214%';
+            case 6: return '-333%';
+            default: return 0;
+          }
+        },
+        opacity: (i) => i === 3 ? 1 : 0,
+        duration: 0.8,
+        ease: 'power2.inOut'
+      });
+    }
+
+    const getResponsiveY = () => {
+      const screenWidth = window.innerWidth;
+      // Интерполяция между 1920px (35.5rem) и 992px (30.4rem)
+      const minWidth = 767.98;
+      const maxWidth = 1920;
+      const minY = 28.731; // rem
+      const maxY = 35.5; // rem
     
-    hideTimeline.to(bottlesContainer, {
-      opacity: 0,
-      duration: 0.1
+      if (screenWidth >= maxWidth) return `${maxY}rem`;
+      if (screenWidth <= minWidth) return `${minY}rem`;
+    
+      // Линейная интерполяция
+      const ratio = (screenWidth - minWidth) / (maxWidth - minWidth);
+      const currentY = minY + (maxY - minY) * ratio;
+      return `${currentY}rem`;
+    };
+    
+    const getResponsiveScale = () => {
+      const screenWidth = window.innerWidth;
+      
+      // Границы изменения ширины экрана
+      const minWidth = 991.98;  // Минимальная ширина (scale = 1)
+      const maxWidth = 1920; // Максимальная ширина (scale = 1.38)
+      
+      // Если экран больше 1920px — оставляем 1.38
+      if (screenWidth >= maxWidth) return 1.38;
+      
+      // Если экран меньше 992px — оставляем 1
+      if (screenWidth <= minWidth) return 1;
+      
+      // Линейная интерполяция между 1.38 и 1
+      const scaleRange = 1.38 - 1; // Разница между max и min scale
+      const widthRange = maxWidth - minWidth; // Разница между max и min шириной
+      
+      // Вычисляем текущий scale
+      const progress = (screenWidth - minWidth) / widthRange; // 0...1
+      const currentScale = 1 + scaleRange * progress;
+      
+      return currentScale;
+    };
+
+    hideTimeline.to(bottles[3], {
+      scale: getResponsiveScale(),
+      y: getResponsiveY(),
+      x: '-0.9375rem',
+      zIndex: 100,
+      duration: 1.5
     }, '-=0.5');
 
-  
   }
 }
 
 // Функция для анимации секции Line
 function initLineAnimation() {
   const lineSection = document.querySelector('.line');
-  
-  const lineTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: lineSection,
-      start: 'top 80%',
-      toggleActions: 'play none none none',
-      once: true
-    }
-  });
+  const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
 
-  lineTl
-  // .from('.line__center--desktop', {
-  //   y: -563,
-  //   x: 9,
-  //   scale: 0.78,
-  //   duration: 1.5,
-  // })
-    .from('.line__left .line__list-item', { 
-      x: -40, 
-      opacity: 0, 
-      duration: 0.8, 
-      stagger: 0.3 
-    }, 'line')
-    .from('.line__right .line__list-item', { 
-      x: 40, 
-      opacity: 0, 
-      duration: 0.8, 
-      stagger: 0.3 
-    }, 'line');
+  if (isMobile) {
+    console.log(1);
+
+  } else {
+    const lineTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: lineSection,
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+        once: true
+      }
+    });
+
+    lineTl
+      .from('.line__center--desktop', {
+        y: -563,
+        x: 9,
+        opacity: 0,
+        scale: 0.78,
+        duration: 1.5,
+      })
+      .from('.line__left .line__list-item', {
+        x: -40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.3
+      }, 'line')
+      .from('.line__right .line__list-item', {
+        x: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.3
+      }, 'line');
+  }
+
 }
 
 // Функция для анимации секции Evidence
@@ -172,42 +247,42 @@ function initTechAnimation() {
     }
   });
 
-  if(isMobile) {
+  if (isMobile) {
     techTl
-    .from('.tech__suptitle', { y: 30, opacity: 0, duration: 0.8 })
-    .from('.tech__title', { y: 30, autoAlpha: 0, duration: 0.5, ease: "power1.out" }, '-=0.3');
-  
-  // Анимация первого элемента списка
-  techTl
-    .from('.tech__list-item:first-child .tech__count', { y: 20, opacity: 0, duration: 0.4 })
-    .from('.tech__list-item:first-child .tech__text', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
-    .from('.tech__list-item:first-child .tech__img-box', { y: 20, opacity: 0, duration: 0.6 }, '-=0.2');
-  
-  // Анимация второго элемента списка
-  techTl
-    .from('.tech__list-item:nth-child(2) .tech__count', { y: 20, opacity: 0, duration: 0.4 })
-    .from('.tech__list-item:nth-child(2) .tech__text', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
-    .from('.tech__list-item:nth-child(2) .tech__img-box', { y: 20, opacity: 0, duration: 0.6 }, '-=0.2')
-    .from('.tech__list-item:nth-child(2) .tech__text:last-child', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
-    .from('.tech__conclusion', { y: 20, opacity: 0, duration: 0.6 }, '-=0.3');
+      .from('.tech__suptitle', { y: 30, opacity: 0, duration: 0.8 })
+      .from('.tech__title', { y: 30, autoAlpha: 0, duration: 0.5, ease: "power1.out" }, '-=0.3');
+
+    // Анимация первого элемента списка
+    techTl
+      .from('.tech__list-item:first-child .tech__count', { y: 20, opacity: 0, duration: 0.4 })
+      .from('.tech__list-item:first-child .tech__text', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
+      .from('.tech__list-item:first-child .tech__img-box', { y: 20, opacity: 0, duration: 0.6 }, '-=0.2');
+
+    // Анимация второго элемента списка
+    techTl
+      .from('.tech__list-item:nth-child(2) .tech__count', { y: 20, opacity: 0, duration: 0.4 })
+      .from('.tech__list-item:nth-child(2) .tech__text', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
+      .from('.tech__list-item:nth-child(2) .tech__img-box', { y: 20, opacity: 0, duration: 0.6 }, '-=0.2')
+      .from('.tech__list-item:nth-child(2) .tech__text:last-child', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
+      .from('.tech__conclusion', { y: 20, opacity: 0, duration: 0.6 }, '-=0.3');
 
   } else {
     techTl
-    .from('.tech__suptitle', { y: 30, opacity: 0, duration: 0.8 })
-    .from('.tech__title', { y: 30, autoAlpha: 0, duration: 0.5, ease: "power1.out" }, '-=0.3');
-  
-  // Анимация первого элемента списка
-  techTl
-    .from('.tech__list-item:first-child .tech__count', { y: 20, opacity: 0, duration: 0.4 })
-    .from('.tech__list-item:first-child .tech__text', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
-    .from('.tech__list-item:first-child .tech__img-box', { y: 20, opacity: 0, duration: 0.6 }, '-=0.2');
-  
-  // Анимация второго элемента списка
-  techTl
-    .from('.tech__list-item:nth-child(2) .tech__count', { y: 20, opacity: 0, duration: 0.4 })
-    .from('.tech__list-item:nth-child(2) .tech__text', { y: 20, opacity: 0, duration: 0.5, stagger: 0.1 }, '-=0.2')
-    .from('.tech__list-item:nth-child(2) .tech__img-box', { y: 20, opacity: 0, duration: 0.6 }, '-=0.2')
-    .from('.tech__conclusion', { y: 20, opacity: 0, duration: 0.6 }, '-=0.3');
+      .from('.tech__suptitle', { y: 30, opacity: 0, duration: 0.8 })
+      .from('.tech__title', { y: 30, autoAlpha: 0, duration: 0.5, ease: "power1.out" }, '-=0.3');
+
+    // Анимация первого элемента списка
+    techTl
+      .from('.tech__list-item:first-child .tech__count', { y: 20, opacity: 0, duration: 0.4 })
+      .from('.tech__list-item:first-child .tech__text', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
+      .from('.tech__list-item:first-child .tech__img-box', { y: 20, opacity: 0, duration: 0.6 }, '-=0.2');
+
+    // Анимация второго элемента списка
+    techTl
+      .from('.tech__list-item:nth-child(2) .tech__count', { y: 20, opacity: 0, duration: 0.4 })
+      .from('.tech__list-item:nth-child(2) .tech__text', { y: 20, opacity: 0, duration: 0.5, stagger: 0.1 }, '-=0.2')
+      .from('.tech__list-item:nth-child(2) .tech__img-box', { y: 20, opacity: 0, duration: 0.6 }, '-=0.2')
+      .from('.tech__conclusion', { y: 20, opacity: 0, duration: 0.6 }, '-=0.3');
 
   }
 
