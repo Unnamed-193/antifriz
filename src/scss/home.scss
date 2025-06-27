@@ -12,16 +12,16 @@
 
 .hero {
   background-color: grey;
-  background-image: url('img/hero/hero.webp');
+  background-image: url('../img/hero/hero.webp');
   /* Для Chrome и Safari */
-  background-image: -webkit-image-set(url("img/hero/hero.webp") 1x,
-      url("img/hero/hero@2x.webp") 2x,
-      url("img/hero/hero@3x.webp") 3x);
+  background-image: -webkit-image-set(url("../img/hero/hero.webp") 1x,
+      url("../img/hero/hero@2x.webp") 2x,
+      url("../img/hero/hero@3x.webp") 3x);
 
   /* Для Firefox */
-  background-image: image-set(url("img/hero/hero.webp") type("image/webp") 1x,
-      url("img/hero/hero@2x.webp") type("image/webp") 2x,
-      url("img/hero/hero@3x.webp") type("image/webp") 3x);
+  background-image: image-set(url("../img/hero/hero.webp") type("image/webp") 1x,
+      url("../img/hero/hero@2x.webp") type("image/webp") 2x,
+      url("../img/hero/hero@3x.webp") type("image/webp") 3x);
   background-repeat: no-repeat;
   background-position: 70% 0;
   background-size: cover;
@@ -39,16 +39,16 @@
   @media (max-width:mixins.toEm(variables.$mobileSmall)) {
     height: mixins.toRem(535.2);
     background-position: center;
-    background-image: url('img/hero/hero_mobile.webp');
+    background-image: url('../img/hero/hero_mobile.webp');
     /* Для Chrome и Safari */
-    background-image: -webkit-image-set(url("img/hero/hero_mobile.webp") 1x,
-        url("img/hero/hero_mobile@2x.webp") 2x,
-        url("img/hero/hero_mobile@3x.webp") 3x);
+    background-image: -webkit-image-set(url("../img/hero/hero_mobile.webp") 1x,
+        url("../img/hero/hero_mobile@2x.webp") 2x,
+        url("../img/hero/hero_mobile@3x.webp") 3x);
 
     /* Для Firefox */
-    background-image: image-set(url("img/hero/hero_mobile.webp") type("image/webp") 1x,
-        url("img/hero/hero_mobile@2x.webp") type("image/webp") 2x,
-        url("img/hero/hero_mobile@3x.webp") type("image/webp") 3x);
+    background-image: image-set(url("../img/hero/hero_mobile.webp") type("image/webp") 1x,
+        url("../img/hero/hero_mobile@2x.webp") type("image/webp") 2x,
+        url("../img/hero/hero_mobile@3x.webp") type("image/webp") 3x);
 
     &::before {
       content: '';
@@ -65,7 +65,7 @@
       position: absolute;
       top: 9%;
       mix-blend-mode: multiply;
-      background-image: url('img/hero/blur.svg');
+      background-image: url('../img/hero/blur.svg');
       background-repeat: no-repeat;
       background-size: cover;
       width: 100%;
@@ -449,13 +449,13 @@
 }
 
 .line {
-  background-image: url('img/line/bg.webp');
+  background-image: url('../img/line/bg.webp');
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
 
   @media (max-width:mixins.toEm(variables.$mobileSmall)) {
-    background-image: url('img/line/bg_mobile.webp');
+    background-image: url('../img/line/bg_mobile.webp');
   }
 
   &__container {
