@@ -209,7 +209,7 @@ function initOwAnimation() {
 // Функция для анимации секции Line
 function initLineAnimation() {
   const lineSection = document.querySelector('.line');
-  const lineSVG = document.querySelector('.line__center svg._mmd4dn');
+  const lineSVG = document.querySelector('.line__ellipse');
   const lineIMG = document.querySelector('.line__center img');
   const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
   const isTablet = window.matchMedia('(max-width: 991.98px)').matches;
@@ -235,12 +235,14 @@ function initLineAnimation() {
     lineTl
     .from(lineSVG, {
       scale: 0.7,
-      duration: 1.8
+      duration: 1.8,
+      willChange: 'transform', // Добавьте это
+      force3D: true  
     }, 'img')
 
     lineTl
     .from(lineIMG, {
-      scale: 0.8,
+      scale: 0.7,
       y: 70,
       duration: 1.8
     }, 'img')

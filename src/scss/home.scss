@@ -634,6 +634,10 @@
     }
   }
 
+  &__ellipse {
+    transform-origin: center;
+  }
+
 
   &__center {
     position: absolute;
