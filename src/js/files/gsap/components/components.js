@@ -59,7 +59,7 @@ function initOwAnimation() {
       scrollTrigger: {
         trigger: owSection,
         start: 'top 50%',
-        end: 'top 30%',
+        // end: 'top 30%',
         toggleActions: 'play none play none',
         markers: false, // можно включить для отладки
       }
