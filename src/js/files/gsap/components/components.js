@@ -234,9 +234,9 @@ function initLineAnimation() {
     });
     lineTl
     .from(lineSVG, {
+      willChange: 'transform', // Добавьте это
       scale: 0.7,
       duration: 1.8,
-      willChange: 'transform', // Добавьте это
       force3D: true  
     }, 'img')
 
