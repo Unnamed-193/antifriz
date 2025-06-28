@@ -229,7 +229,7 @@ function initLineAnimation() {
         start: 'top 60%',
         toggleActions: 'play none none none',
         once: true,
-        markers: true
+        markers: false
       }
     });
     lineTl
