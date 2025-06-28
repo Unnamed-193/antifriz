@@ -305,7 +305,7 @@
 
 
       @media (max-width:mixins.toEm(variables.$mobile)) {
-        height: auto;
+        @include mixins.adaptiveValue("height", 200, 101.3, variables.$mobile);
       }
     }
 

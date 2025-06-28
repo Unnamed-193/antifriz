@@ -28,8 +28,21 @@ function initOwAnimation() {
 
 
   if (isMobile) {
-    // Мобильная версия
-    console.log(1);
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: owSection,
+        start: 'top -20%',
+        // end: 'top 30%',
+        toggleActions: 'play none reverse none',
+        markers: false, // можно включить для отладки
+      }
+    });
+
+    tl.to(bottlesContainer, {
+      x: -180,
+      duration: 1.8,
+    });
+
   } else {
     // Десктоп версия
     gsap.set(bottles, {
@@ -63,6 +76,7 @@ function initOwAnimation() {
         toggleActions: 'play none play none',
         markers: false, // можно включить для отладки
       }
+      
     });
 
     showTimeline.to(bottlesContainer, {
@@ -195,6 +209,8 @@ function initOwAnimation() {
 // Функция для анимации секции Line
 function initLineAnimation() {
   const lineSection = document.querySelector('.line');
+  const lineSVG = document.querySelector('.line__center svg._mmd4dn');
+  const lineIMG = document.querySelector('.line__center img');
   const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
   const isTablet = window.matchMedia('(max-width: 991.98px)').matches;
   const lineTl = gsap.timeline({
@@ -207,8 +223,27 @@ function initLineAnimation() {
   });
 
   if (isMobile) {
-    console.log(1);
+    const lineTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: lineSection,
+        start: 'top 60%',
+        toggleActions: 'play none none none',
+        once: true,
+        markers: true
+      }
+    });
+    lineTl
+    .from(lineSVG, {
+      scale: 0.7,
+      duration: 1.8
+    }, 'img')
 
+    lineTl
+    .from(lineIMG, {
+      scale: 0.8,
+      y: 70,
+      duration: 1.8
+    }, 'img')
 
     lineTl
     .from('.line__list-item', {
