@@ -48,6 +48,7 @@ function initOwAnimation() {
   } else {
     // Десктоп версия
     gsap.set(bottles, {
+      willChange: 'transform',
       x: (i) => {
         switch (i) {
           case 0: return '335%';
