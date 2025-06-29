@@ -39,6 +39,8 @@ function initOwAnimation() {
     });
 
     tl.to(bottlesContainer, {
+      willChange: 'transform',
+      force3D: true,
       x: -180,
       duration: 1.8,
     });
