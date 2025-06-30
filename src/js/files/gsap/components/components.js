@@ -141,7 +141,7 @@ scrollTimeline
     },
     y: (i) => [0, 1, 2, 6].includes(i) ? '2%' : 0,
     opacity: 1,
-    duration: 0.8,
+    duration: 1,
     ease: 'power2.inOut'
   }, '<0.3')
   .to(bottles, {
@@ -157,7 +157,7 @@ scrollTimeline
       }
     },
     opacity: (i) => i === 3 ? 1 : 0,
-    duration: 0.8,
+    duration: 1,
     ease: 'power2.inOut'
   })
   .to(bottles[3], {
