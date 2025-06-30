@@ -31,9 +31,9 @@ function initOwAnimation() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: owSection,
-        start: 'top -20%',
-        // end: 'top 30%',
-        toggleActions: 'play none reverse none',
+        start: "top 40%", // Начинаем анимацию, когда верх секции достигнет низа viewport
+        end: "bottom top",   // Заканчиваем анимацию, когда низ секции достигнет верха viewport
+        scrub: true,  
         markers: false, // можно включить для отладки
       }
     });
