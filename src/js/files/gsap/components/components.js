@@ -46,116 +46,6 @@ function initOwAnimation() {
     });
 
   } else {
-    // Десктоп версия
-    gsap.set(bottles, {
-      willChange: 'transform',
-      x: (i) => {
-        switch (i) {
-          case 0: return '335%';
-          case 1: return '216%';
-          case 2: return '112%';
-          case 4: return '-102%';
-          case 5: return '-214%';
-          case 6: return '-333%';
-          default: return 0;
-        }
-      },
-      y: (i) => [0, 1, 2, 6].includes(i) ? '2%' : 0,
-      opacity: (i) => i === 3 ? 1 : 0,
-      zIndex: (i) => {
-        if (i === 3) return 4;
-        if ([0, 6].includes(i)) return 1;
-        if ([1, 5].includes(i)) return 2;
-        return 3;
-      }
-    });
-
-
-    const showTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: owSection,
-        start: 'top 50%',
-        // end: 'top 30%',
-        toggleActions: 'play none play none',
-        markers: false, // можно включить для отладки
-      }
-      
-    });
-
-    showTimeline.to(bottlesContainer, {
-      opacity: 1,
-      y: 0,
-      duration: 0.5
-    });
-
-    showTimeline.to(bottles, {
-      x: (i) => {
-        switch (i) {
-          case 0: return '169%';
-          case 1: return '112%';
-          case 2: return '61%';
-          case 4: return '-49%';
-          case 5: return '-102%';
-          case 6: return '-172%';
-          default: return 0;
-        }
-      },
-      y: (i) => [0, 1, 2, 6].includes(i) ? '2%' : 0,
-      opacity: 1,
-      duration: 0.8,
-      ease: 'power2.inOut'
-    }, '-=0.3');
-
-    // Обратная анимация при скролле вниз за пределы секции
-    const hideTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: owSection,
-        start: 'bottom bottom',
-        end: 'bottom+=100% bottom',
-        toggleActions: 'play none reverse none',
-        markers: false // можно включить для отладки
-      }
-    });
-
-    hideTimeline.to(bottles, {
-      x: (i) => {
-        switch (i) {
-          case 0: return '335%';
-          case 1: return '216%';
-          case 2: return '112%';
-          case 4: return '-102%';
-          case 5: return '-214%';
-          case 6: return '-333%';
-          default: return 0;
-        }
-      },
-      opacity: (i) => i === 3 ? 1 : 0,
-      duration: 0.8,
-      ease: 'power2.inOut'
-    });
-
-    const scrollPosition = window.scrollY;
-    const sectionTop = owSection.offsetTop;
-    const sectionHeight = owSection.offsetHeight;
-
-    if (scrollPosition > sectionTop + sectionHeight * 0.5) {
-      hideTimeline.to(bottles, {
-        x: (i) => {
-          switch (i) {
-            case 0: return '335%';
-            case 1: return '216%';
-            case 2: return '112%';
-            case 4: return '-102%';
-            case 5: return '-214%';
-            case 6: return '-333%';
-            default: return 0;
-          }
-        },
-        opacity: (i) => i === 3 ? 1 : 0,
-        duration: 0.8,
-        ease: 'power2.inOut'
-      });
-    }
 
     const getResponsiveY = () => {
       const screenWidth = window.innerWidth;
@@ -198,14 +88,85 @@ function initOwAnimation() {
       return currentScale;
     };
 
-    hideTimeline.to(bottles[3], {
-      scale: getResponsiveScale(),
-      y: getResponsiveY(),
-      x: '-0.9375rem',
-      zIndex: 100,
-      duration: 1.5
-    }, '-=0.5');
+    gsap.set(bottles, {
+      willChange: 'transform',
+      x: (i) => {
+        switch (i) {
+          case 0: return '335%';
+          case 1: return '216%';
+          case 2: return '112%';
+          case 4: return '-102%';
+          case 5: return '-214%';
+          case 6: return '-333%';
+          default: return 0;
+        }
+      },
+      y: (i) => [0, 1, 2, 6].includes(i) ? '2%' : 0,
+      opacity: (i) => i === 3 ? 1 : 0,
+      zIndex: (i) => {
+        if (i === 3) return 4;
+        if ([0, 6].includes(i)) return 1;
+        if ([1, 5].includes(i)) return 2;
+        return 3;
+      }
+    });
+    // Удаляем старые таймлайны и создаем новый с scrub
+const scrollTimeline = gsap.timeline({
+  scrollTrigger: {
+    trigger: owSection,
+    start: "top 40%", // Начинаем анимацию, когда верх секции достигнет низа viewport
+    end: "bottom top",   // Заканчиваем анимацию, когда низ секции достигнет верха viewport
+    scrub: true,         // Плавное привязывание анимации к скроллу
+    markers: false     // Можно включить для отладки
+  }
+});
 
+// Добавляем анимации в timeline
+scrollTimeline
+  .fromTo(bottlesContainer, 
+    { opacity: 0, y: 100 },
+    { opacity: 1, y: 0, duration: 0.5 }
+  )
+  .to(bottles, {
+    x: (i) => {
+      switch (i) {
+        case 0: return '169%';
+        case 1: return '112%';
+        case 2: return '61%';
+        case 4: return '-49%';
+        case 5: return '-102%';
+        case 6: return '-172%';
+        default: return 0;
+      }
+    },
+    y: (i) => [0, 1, 2, 6].includes(i) ? '2%' : 0,
+    opacity: 1,
+    duration: 0.8,
+    ease: 'power2.inOut'
+  }, '<0.3')
+  .to(bottles, {
+    x: (i) => {
+      switch (i) {
+        case 0: return '335%';
+        case 1: return '216%';
+        case 2: return '112%';
+        case 4: return '-102%';
+        case 5: return '-214%';
+        case 6: return '-333%';
+        default: return 0;
+      }
+    },
+    opacity: (i) => i === 3 ? 1 : 0,
+    duration: 0.8,
+    ease: 'power2.inOut'
+  })
+  .to(bottles[3], {
+    scale: getResponsiveScale(),
+    y: getResponsiveY(),
+    x: '-0.9375rem',
+    zIndex: 100,
+    duration: 1.5
+  }, '<0.5');
   }
 }
 
