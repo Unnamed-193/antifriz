@@ -117,7 +117,7 @@ const scrollTimeline = gsap.timeline({
     start: "top 70%", // Начинаем анимацию, когда верх секции достигнет низа viewport
     end: "bottom top",   // Заканчиваем анимацию, когда низ секции достигнет верха viewport
     scrub: true,         // Плавное привязывание анимации к скроллу
-    markers: true     // Можно включить для отладки
+    markers: false    // Можно включить для отладки
   }
 });
 
