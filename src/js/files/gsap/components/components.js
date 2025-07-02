@@ -102,7 +102,7 @@ function initOwAnimation() {
         }
       },
       y: (i) => [0, 1, 2, 6].includes(i) ? '2%' : 0,
-      // opacity: (i) => i === 3 ? 1 : 0,
+      opacity: (i) => i === 3 ? 1 : 0,
       zIndex: (i) => {
         if (i === 3) return 4;
         if ([0, 6].includes(i)) return 1;
@@ -114,10 +114,10 @@ function initOwAnimation() {
 const scrollTimeline = gsap.timeline({
   scrollTrigger: {
     trigger: owSection,
-    start: "top 40%", // Начинаем анимацию, когда верх секции достигнет низа viewport
+    start: "top 70%", // Начинаем анимацию, когда верх секции достигнет низа viewport
     end: "bottom top",   // Заканчиваем анимацию, когда низ секции достигнет верха viewport
     scrub: true,         // Плавное привязывание анимации к скроллу
-    markers: false     // Можно включить для отладки
+    markers: true     // Можно включить для отладки
   }
 });
 
@@ -139,11 +139,24 @@ scrollTimeline
         default: return 0;
       }
     },
+    stagger: {
+      each: 0.1,         // Задержка между группами
+      from: "center",     // Начинаем анимацию с центра (индекс 3)
+      grid: [1, 7],       // Указываем что у нас 1 строка и 7 элементов
+      axis: "x",          // Ось для stagger (горизонтальная)
+      // Кастомная группировка (0 и 6, 1 и 5, 2 и 4)
+      custom: [
+        [0, 6],          // Первая группа (крайние бутылки)
+        [1, 5],          // Вторая группа
+        [2, 4],          // Третья группа
+        [3]              // Центральная (без задержки)
+      ]
+    },
     y: (i) => [0, 1, 2, 6].includes(i) ? '2%' : 0,
     opacity: 1,
-    duration: 1,
+    duration: 0.7,
     ease: 'power2.inOut'
-  }, '<0.3')
+  }, '<0.2')
   .to(bottles, {
     x: (i) => {
       switch (i) {
@@ -156,8 +169,21 @@ scrollTimeline
         default: return 0;
       }
     },
+    stagger: {
+      each: 0.1,         // Задержка между группами
+      from: "edges",      // Начинаем анимацию с краев
+      grid: [1, 7],       // 1 строка и 7 элементов
+      axis: "x",          // Горизонтальная ось
+      // Обратная кастомная группировка (сначала крайние, потом ближе к центру)
+      custom: [
+        [0, 6],          // Первая группа (крайние бутылки)
+        [1, 5],          // Вторая группа
+        [2, 4],          // Третья группа
+        [3]              // Центральная (без задержки)
+      ]
+    },
     opacity: (i) => i === 3 ? 1 : 0,
-    duration: 1,
+    duration: 0.5,
     ease: 'power2.inOut'
   })
   .to(bottles[3], {
@@ -166,8 +192,10 @@ scrollTimeline
     x: '-0.9375rem',
     zIndex: 100,
     duration: 1.5
-  }, '<0.5');
+  }, '<0.8');
   }
+
+  
 }
 
 // Функция для анимации секции Line
@@ -224,7 +252,6 @@ function initLineAnimation() {
   } else if(isTablet) {
     lineTl
     .from('.line__list-item', {
-      delay: 0.3,
       y: 30,
       opacity: 0,
       duration: 0.8,
@@ -234,14 +261,12 @@ function initLineAnimation() {
 
     lineTl
       .from('.line__left .line__list-item', {
-        delay: 0.3,
         x: -40,
         opacity: 0,
         duration: 0.8,
         stagger: 0.3
       }, 'line')
       .from('.line__right .line__list-item', {
-        delay: 0.3,
         x: 40,
         opacity: 0,
         duration: 0.8,
