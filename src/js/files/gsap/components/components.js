@@ -102,7 +102,7 @@ function initOwAnimation() {
         }
       },
       y: (i) => [0, 1, 2, 6].includes(i) ? '2%' : 0,
-      opacity: (i) => i === 3 ? 1 : 0,
+      // opacity: (i) => i === 3 ? 1 : 0,
       zIndex: (i) => {
         if (i === 3) return 4;
         if ([0, 6].includes(i)) return 1;
@@ -180,9 +180,10 @@ function initLineAnimation() {
   const lineTl = gsap.timeline({
     scrollTrigger: {
       trigger: lineSection,
-      start: 'top 80%',
+      start: 'top 13%',
       toggleActions: 'play none none none',
-      once: true
+      once: true,
+      markers: false
     }
   });
 
@@ -233,14 +234,14 @@ function initLineAnimation() {
 
     lineTl
       .from('.line__left .line__list-item', {
-        delay: 0.7,
+        delay: 0.3,
         x: -40,
         opacity: 0,
         duration: 0.8,
         stagger: 0.3
       }, 'line')
       .from('.line__right .line__list-item', {
-        delay: 0.7,
+        delay: 0.3,
         x: 40,
         opacity: 0,
         duration: 0.8,
