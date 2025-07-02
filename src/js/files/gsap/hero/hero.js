@@ -5,67 +5,64 @@ document.addEventListener("DOMContentLoaded", () => {
   const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
 
   if (isMobile) {
-    tl.from('.hero__title', { 
-      y: 30, 
-      autoAlpha: 0, 
+    tl.from('.hero__title', {
+      y: 30,
+      autoAlpha: 0,
       ease: "none"
     },)
-      tl.from('.hero__icon', { 
-        delay: 0.09,
-        y: 30, 
-        autoAlpha: 0, 
-        ease: "sine.in"
-      }, 'img');
-      tl.from('.hero__bottles', { 
-        delay: 0.09,
-        y: 30, 
-        autoAlpha: 0, 
-        ease: "sine.in"
-      }, 'img');
-      
-      tl.from('.hero__button', { 
-        delay: 0.09,
-        y: 30, 
-        autoAlpha: 0, 
-      }); // Задержка после slogan-box
-      tl.from('.hero__slogan', { 
-        y: 30, 
-        autoAlpha: 0, 
-        ease: "sine.in"
-      }, "+=0.1");
+    tl.from('.hero__icon', {
+      delay: 0.09,
+      y: 30,
+      autoAlpha: 0,
+      ease: "sine.in"
+    }, 'img');
+    tl.from('.hero__bottles', {
+      delay: 0.09,
+      y: 30,
+      autoAlpha: 0,
+      ease: "sine.in"
+    }, 'img');
+
+    tl.from('.hero__button', {
+      y: 30,
+      autoAlpha: 0,
+    }, '-=0.2'); // Задержка после slogan-box
+    tl.from('.hero__slogan', {
+      y: 30,
+      autoAlpha: 0,
+      ease: "sine.in"
+    }, "-=0.2");
   } else {
-      // 1. Анимация заголовка и текста
-  tl.from('.hero__title', { 
-    y: 30, 
-    autoAlpha: 0, 
-    ease: "none"
-  },)
-    tl.from('.hero__icon', { 
-      delay: 0.09,
-      y: 30, 
-      autoAlpha: 0, 
+    // 1. Анимация заголовка и текста
+    tl.from('.hero__bottles', {
+      x: -30,
+      autoAlpha: 0,
       ease: "sine.in"
-    },);
-    tl.from('.hero__bottles', { 
-      delay: 0.09,
-      y: 30, 
-      autoAlpha: 0, 
-      ease: "sine.in"
-    },);
-    tl.from('.hero__slogan', { 
-      delay: 0.09,
-      y: 30, 
-      autoAlpha: 0, 
-      ease: "sine.in"
-    });
+    }, 'bottle')
 
-  // 2. Анимация slogan-box (после текста, перед кнопкой)
+    .from('.hero__button', {
+      x: 30,
+      autoAlpha: 0,
+      ease: "sine.in"
+    }, "bottle"); 
 
-  // 3. Анимация кнопки (после slogan-box)
-  tl.from('.hero__button', { 
-    y: 30, 
-    autoAlpha: 0, 
-  }, "+=0.2"); // Задержка после slogan-box
+
+    tl.from('.hero__title', {
+      y: 30,
+      autoAlpha: 0,
+      ease: "none"
+    }, '-=0.1').from('.hero__icon', {
+      y: 30,
+      autoAlpha: 0,
+      ease: "sine.in"
+    }, '-=0.2').from('.hero__slogan', {
+      y: 30,
+      autoAlpha: 0,
+      ease: "sine.in"
+    }, '-=0.2');
+
+
+   
   }
 
 
